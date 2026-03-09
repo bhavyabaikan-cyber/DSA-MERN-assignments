@@ -1,0 +1,62 @@
+###Read all users
+GET http://localhost:3000/user-api/users
+
+###
+# Read a user by id
+GET http://localhost:3000/userAPI/sers/1
+
+###Create new user
+POST http://localhost:3000/user-API/users
+Content-Type: application/json
+
+{
+    "id":1,
+    "name":"Bhavya",
+    "age": 20
+}
+
+###Update a user
+PUT http://localhost:3000/user-API/users
+Content-Type: application/json
+
+{
+    "id":64,
+    "name":"Minny",
+    "age": 22
+}
+
+###
+DELETE http://localhost:3000/user-API/users/1
+
+###
+GET http://localhost:3000/product-API/products
+
+###
+
+GET http://localhost:3000/product-API/products/HP
+
+###
+
+PUT http://localhost:3000/product-API/products
+Content-Type: application/json
+
+{
+    "name" : "Laptp",
+   "brand" : "HP",
+   "price" : 90000
+}
+
+###
+POST http://localhost:3000/product-API/products
+Content-Type: application/json
+
+{
+    "name" : "Laptp",
+   "brand" : "HP",
+   "price" : 90000
+}
+
+
+###
+
+DELETE http://localhost:3000/product-API/products/HP

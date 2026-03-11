@@ -1,20 +1,41 @@
-  //1.Create HTTP server
-import exp from 'express' //since it is a default export so we can use any name
-const app = exp()  //we can use any name instead of app to hold express functions  
-import {userApp} from "./APIs/user-API.js"
-import {productApp} from "./APIs/ProductAPI.js"
-//Express application contains http server
-
-//use body parser middleware
-app.use(exp.json())   
-
-//Forward req to userApp if path starts with /user-api
-app.use('/user-api',userApp)
-
-//Forward req to productApp if path starts with /user-api
+//create express app
+import exp from 'express'
+import { connect } from 'mongoose'
+import {userApp} from "./APIs/UserAPI.js"
+import { productApp } from './APIs/ProductAPI.js'
+import cookieParser from 'cookie-parser'
+const app = exp()
+app.use(exp.json())
+app.use(cookieParser())
+//Forward req to UserApp if path starts with /user-api
+app.use("/user-api",userApp)
 app.use('/product-api',productApp)
 
-//set a port number
-const port = 3000
-//assign port number to http server
-app.listen(port, () => console.log(`server listening to port ${port}...`))
+//connect to DB server
+async function connectDB() {
+    try {
+        await connect("mongodb://localhost:27017/anuragdb")
+        console.log("DB connection success")
+
+        //start server
+        app.listen(4000, () => console.log("Server on port 4000..."))
+    } catch (err) {
+        console.log("err in DB connection: ", err)
+    }
+}
+connectDB() 
+
+//error handling middleware (4contains 4 parameters)
+app.use((err,req,res,next)=>{
+    console.log(err.name)
+    //validation error
+    if(err.name === "ValidationError"){
+        return res.status(300).json({message : "error occured",error : err.message})
+    }
+    //cast error
+    if(err.name === "CastError"){
+        return res.status(300).json({message : "error occured",error : err.message})
+    }
+    res.status(500).json({message : "error from server",Error : err.message})
+  //error=>{name,message,callstack}
+})

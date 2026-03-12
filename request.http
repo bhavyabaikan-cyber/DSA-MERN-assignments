@@ -1,0 +1,71 @@
+###Read all users
+GET http://localhost:4000/user-api/users
+Cookie: : token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAbWFpbC5jb20iLCJpYXQiOjE3NzI4OTAwNzUsImV4cCI6MTc3Mjg5MzY3NX0.p4Uaj-7xp2HcDxT6AI7GJMXV51y_P8TZrTeXN07j7KE; Path=/; HttpOnly; SameSite=Lax
+###
+# Read a user by id
+GET http://localhost:4000/user-api/user
+
+
+###Create new user
+POST http://localhost:4000/user-api/users
+Content-Type: application/json
+
+{
+   "username" : "abcd",
+   "email" : "abcd@mail.com",
+   "password" : "abcd",
+   "age" : 18
+}
+
+###
+//user login
+POST  http://localhost:4000/user-api/auth
+Content-Type: : application/json
+
+{
+    "email" : "abcd@mail.com",
+    "password" : "abcd"
+}
+
+###Update a user
+PUT http://localhost:4000/user-api/users
+Content-Type: application/json
+
+
+###
+DELETE http://localhost:4000/user-api/users/69aa922ea0b2adc363b25de1
+
+
+###
+//store a product
+POST http://localhost:4000/product-API/products
+Content-Type: application/json
+
+{
+   "productId" : 1,
+   "productName" : "Laptop",
+   "price" : 20000,
+   "brand" : "Acer"
+}
+
+###
+//Get all Products
+GET  http://localhost:4000/product-API/products
+
+###
+GET  http://localhost:4000/product-API/products/1
+
+###
+PUT  http://localhost:4000/product-API/products/1
+Content-Type: application/json
+
+{
+   "productId" : 2,
+   "productName" : "Iphone",
+   "price" : 30000,
+   "brand" : "Apple"
+}
+
+
+###
+DELETE http://localhost:4000/product-API/products/2
